@@ -28,10 +28,10 @@ Settings ➔ Secrets and variables ➔ Actions ➔ New repository secret
 * Name: EC2_SSH_KEY  
   Value: Paste the content of your .pem private key (used for EC2 SSH access)
 
-* Name: EC2_USER 
+* Name: EC2_USER<br />
   Value: Provide the EC2 instance login user in GitHub Secrets which can be used for executing the ansible playbook for deployment.
 
-* Name: EC2_ANSIBLE_HOST 
+* Name: EC2_ANSIBLE_HOST<br />
   Value: Provide your EC2 machine Public IP address in GitHub secret to avoid hardcoding of IPs and keeping your virtual machine IP secure. 
 
 ## How to Trigger the Deployment
