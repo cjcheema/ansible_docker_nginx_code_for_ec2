@@ -30,7 +30,7 @@ jobs:
     - name: Create Ansible inventory file by using GitHub secrets
       run: |
         echo "[webserver]" > inventory.ini
-        cho "${{ secrets.EC2_ANSIBLE_HOST }}" >> inventory.ini
+        echo "${{ secrets.EC2_ANSIBLE_HOST }}" >> inventory.ini
   #echo " cj-demo-linux ansible_host=$ secrets.EC2_ANSIBLE_HOST }}" >> inventory.ini
 
     - name: Run Ansible Playbook
