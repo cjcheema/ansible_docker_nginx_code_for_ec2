@@ -3,13 +3,14 @@ This project automates the installation of Docker and deployment of an NGINX con
 The entire process is triggered by a GitHub Actions workflow, using Ansible for configuration management.
 
 ## Project Structure
-bash
+```bash
 .
 ├── .github
 │   └── workflows
 │       └── deploy.yml          # GitHub Actions workflow
 ├── deploy_nginx.yml            # Ansible playbook to install Docker and deploy NGINX
 └── inventory.ini               # Ansible inventory with EC2 instance details
+```
 
 ## Prerequisites
 * An existing AWS EC2 instance (Ubuntu preferred)
@@ -55,8 +56,9 @@ The NGINX container will be deployed and accessible via your EC2 public IP on po
 ## Example Access
 After a successful run, you can access your NGINX server by visiting:
 
-cpp
+```cpp
 http://<your-ec2-public-ip>
+```
 
 You should see the default NGINX welcome page!
 
