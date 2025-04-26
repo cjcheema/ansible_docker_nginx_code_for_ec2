@@ -10,11 +10,19 @@
         state: present
         update_cache: yes
 
+    - name: Pause for 10 seconds after installing Docker
+      pause:
+        seconds: 10    
+
     - name: Start and enable Docker service
       systemd:
         name: docker
         enabled: yes
         state: started
+
+    - name: Wait for server to be ready after Docker service start
+      wait_for_connection:
+        timeout: 300    
 
     - name: Create a custom index.html
       copy:
