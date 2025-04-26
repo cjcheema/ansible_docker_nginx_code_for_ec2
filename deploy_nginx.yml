@@ -28,7 +28,7 @@
       copy:
         dest: /home/ubuntu/index.html
         content: |
-          Hello World! I am nginx running on cj-demo-linux on its Private IP: {{ ansible.default_ipv4.address }}
+          Hello World! I am nginx running on cj-demo-linux ec2 instance.
 
     - name: Run NGINX container with custom Page
       docker_container:
