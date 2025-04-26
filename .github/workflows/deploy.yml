@@ -35,7 +35,3 @@ jobs:
     - name: Run Ansible Playbook
       run: |
         ansible-playbook -i inventory.ini deploy_nginx.yml
-      # env:
-      #   ANSIBLE_HOST_KEY_CHECKING: "False"
-      #   ANSIBLE_PRIVATE_KEY_FILE: private_key.pem
-      #   ANSIBLE_USER: ${{ secrets.EC2_USER 
