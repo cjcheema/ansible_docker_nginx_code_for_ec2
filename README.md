@@ -2,8 +2,6 @@
 This project automates the installation of Docker and deployment of an NGINX container on an already running AWS EC2 instance.
 The entire process is triggered by a GitHub Actions workflow, using Ansible for configuration management.
 
-Read more on my blog: https://www.cjcheema.com/2025/04/26/how-to-deploy-docker-containers-with-nginx-on-aws-ec2-using-ansible-and-github-actions/
-
 ## Project Structure
 ```bash
 .
@@ -66,6 +64,18 @@ http://<your-ec2-public-ip>
 
 You should see the default NGINX welcome page!
 
+## Read more
+Check out my article to learn more on How to Deploy Docker and NGINX Containers on AWS EC2 via Ansible and GitHub Actions:  https://www.cjcheema.com/2025/04/26/how-to-deploy-docker-containers-with-nginx-on-aws-ec2-using-ansible-and-github-actions/
+
 ## Contributing
 Feel free to fork, enhance, and submit a pull request.
 Feedback, suggestions, and improvements are always welcome!
+
+## Author: 
+This project is created and maintained by Charanjit Singh.
+
+* Email: charanjit.singh@outlook.in/charanjit.cheema@cjcheema.com
+* Website: https://www.cjcheema.com
+* LinkedIn: https://www.linkedin.com/in/cjcheema/
+
+Feel free to connect for any questions, suggestions, or feedback.
