@@ -1,0 +1,41 @@
+name: Deploy Docker and NGINX container on EC2 via Ansible
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.x
+
+    - name: Install Ansible
+      run: |
+        python -m pip install --upgrade pip
+        pip install ansible
+
+    - name: Create SSH key
+      run: |
+        echo "${{ secrets.EC2_SSH_KEY }}" > private_key.pem
+        chmod 600 private_key.pem
+    
+    # This below workflow code is optional but I recommend, use EC2_ANSIBLE_HOST as a secret to avoid hardcoding IPs and keeping your virtual machine IP secure
+    - name: Create Ansible inventory file by using GitHub secrets
+      run: |
+        echo "[webserver]" > inventory.ini
+        echo " cj-demo-linux ansible_host=${{ secrets.EC2_ANSIBLE_HOST }}" >> inventory.ini
+
+    - name: Run Ansible Playbook
+      run: |
+        ansible-playbook -i inventory.ini deploy_nginx.yml
+      env:
+        ANSIBLE_HOST_KEY_CHECKING: "False"
+        ANSIBLE_PRIVATE_KEY_FILE: private_key.pem
+        ANSIBLE_USER: ${{ secrets.EC2_USER }}

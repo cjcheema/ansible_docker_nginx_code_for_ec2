@@ -1,0 +1,35 @@
+---
+- name: Deploy Docker and run NGINX container
+  hosts: webserver
+  become: yes
+
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Start and enable Docker service
+      systemd:
+        name: docker
+        enabled: yes
+        state: started
+
+    - name: Create a custom index.html
+      copy:
+        dest: /home/ubuntu/index.html
+        content: |
+          Hello World! I am nginx running on cj-demo-linux
+
+    - name: Run NGINX container with custom Page
+      docker_container:
+        name: nginx
+        image: nginx:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "80:80"
+        volumes:
+          - /home/ubuntu/index.html:/usr/share/nginx/html/index.html:ro
+        
