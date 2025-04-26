@@ -2,6 +2,8 @@
 This project automates the installation of Docker and deployment of an NGINX container on an already running AWS EC2 instance.
 The entire process is triggered by a GitHub Actions workflow, using Ansible for configuration management.
 
+Read more on my blog: https://www.cjcheema.com/2025/04/26/how-to-deploy-docker-containers-with-nginx-on-aws-ec2-using-ansible-and-github-actions/
+
 ## Project Structure
 ```bash
 .
@@ -9,28 +11,30 @@ The entire process is triggered by a GitHub Actions workflow, using Ansible for 
 │   └── workflows
 │       └── deploy.yml          # GitHub Actions workflow
 ├── deploy_nginx.yml            # Ansible playbook to install Docker and deploy NGINX
-└── inventory.ini               # Ansible inventory with EC2 instance details
+└── inventory.ini               # Ansible inventory with EC2 instance details 
 ```
+<b>Note:</b> I have removed the inventory file since I am using dynamic inventory with ansible considering security.
 
 ## Prerequisites
 * An existing AWS EC2 instance (Ubuntu preferred)
 * SSH access to the instance
 * GitHub repository to store this project
 
-## GitHub Secrets configured:
-
-EC2_SSH_KEY: Your EC2 private SSH key content
-
 ## Setting Up GitHub Secrets
 Go to your GitHub repository:
 
 Settings ➔ Secrets and variables ➔ Actions ➔ New repository secret
 
-### Add a new secret:
+### Configure the GitHub Secrets under New Repository secret:
 
-Name: EC2_SSH_KEY
+* Name: EC2_SSH_KEY  
+  Value: Paste the content of your .pem private key (used for EC2 SSH access)
 
-Value: Paste the content of your .pem private key (used for EC2 SSH access)
+* Name: EC2_USER 
+  Value: Provide the EC2 instance login user in GitHub Secrets which can be used for executing the ansible playbook for deployment.
+
+* Name: EC2_ANSIBLE_HOST 
+  Value: Provide your EC2 machine Public IP address in GitHub secret to avoid hardcoding of IPs and keeping your virtual machine IP secure. 
 
 ## How to Trigger the Deployment
 Once you push the project to GitHub:
@@ -61,11 +65,6 @@ http://<your-ec2-public-ip>
 ```
 
 You should see the default NGINX welcome page!
-
-## Future Enhancements
-* Use dynamic inventory for better scalability.
-* Add support for multiple containers or custom images.
-* Secure the playbook and workflow with better practices (vaults, encrypted secrets).
 
 ## Contributing
 Feel free to fork, enhance, and submit a pull request.
